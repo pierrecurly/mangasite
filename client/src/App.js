@@ -5,8 +5,10 @@ import NavBar from './component/home';
 class App extends Component {
   render() {
     return (
-      <NavBar />
-      <SideNav />
+      <div>
+        <NavBar />
+        <SideNav />
+      </div>
     );
   }
 }
