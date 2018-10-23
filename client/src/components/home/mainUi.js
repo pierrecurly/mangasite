@@ -2,92 +2,35 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
+import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems } from './listItems';
 
-class Main extends React.Component {
-    state = {
-        open: false,
-    };
-    handleDrawerOpen = () => {
-        this.setState({ open: true });
-    };
-    handleDrawerClose = () => {
-        this.setState({ open: false });
-    };
-
-    render() {
-        const { classes, theme } = this.props;
-
-        return (
-            <div className={classes.root}>
-                <CssBaseline />
-                <AppBar
-                    position="fixed"
-                    className={classNames(classes.appBar, {
-
-                        [classes.appBarShift]: this.state.open,
-                    })}
-                >
-                    <Toolbar disableGutters={!this.state.open}>
-                        <IconButton
-                            color="inherit"
-                            aria-label="Open drawer"
-                            onClick={this.handleDrawerOpen}
-                            className={classNames(classes.menuButton, {
-                                [classes.hide]: this.state.open,
-                            })}
-                        >
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography variant="h6" color="inherit" noWrap>
-                            Manga-site
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
-                <Drawer
-                    variant="permanent"
-                    classes={{
-                        paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
-                    }}
-                    open={this.state.open}
-                >
-                    <div className={classes.toolbar}>
-                        <IconButton onClick={this.handleDrawerClose}>
-                            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-                        </IconButton>
-                    </div>
-                    <Divider />
-                    <List>
-                        {mainListItems}
-                    </List>
-                </Drawer>
-
-                {/* Content here */}
-                <main className={classes.content}>
-                    <div className={classes.toolbar} />
-
-                </main>
-            </div>
-        );
-    }
-}
-
-
 const drawerWidth = 240;
+
 const styles = theme => ({
     root: {
         display: 'flex',
+    },
+    toolbar: {
+        paddingRight: 24, // keep right padding when drawer closed
+    },
+    toolbarIcon: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        padding: '0 8px',
+        ...theme.mixins.toolbar,
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
@@ -108,8 +51,11 @@ const styles = theme => ({
         marginLeft: 12,
         marginRight: 36,
     },
-    hide: {
+    menuButtonHidden: {
         display: 'none',
+    },
+    title: {
+        flexGrow: 1,
     },
     drawerPaper: {
         position: 'relative',
@@ -131,22 +77,120 @@ const styles = theme => ({
             width: theme.spacing.unit * 9,
         },
     },
-    toolbar: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: '0 8px',
-        ...theme.mixins.toolbar,
-    },
+    appBarSpacer: theme.mixins.toolbar,
     content: {
         flexGrow: 1,
         padding: theme.spacing.unit * 3,
+        height: '100vh',
+        overflow: 'auto',
+    },
+    chartContainer: {
+        marginLeft: -22,
+    },
+    tableContainer: {
+        height: 320,
+    },
+    h5: {
+        marginBottom: theme.spacing.unit * 2,
+    },
+    footer: {
+        backgroundColor: theme.palette.background.paper,
+        padding: theme.spacing.unit * 6,
     },
 });
 
-Main.propTypes = {
+class Dashboard extends React.Component {
+    state = {
+        open: true,
+    };
+
+    handleDrawerOpen = () => {
+        this.setState({ open: true });
+    };
+
+    handleDrawerClose = () => {
+        this.setState({ open: false });
+    };
+
+    render() {
+        const { classes } = this.props;
+
+        return (
+            <React.Fragment>
+                <CssBaseline />
+                <div className={classes.root}>
+                    <AppBar
+                        color="primary"
+                        position="absolute"
+                        className={classNames(classes.appBar, this.state.open && classes.appBarShift)}
+                    >
+                        <Toolbar disableGutters={!this.state.open} className={classes.toolbar}>
+                            <IconButton
+                                color="inherit"
+                                aria-label="Open drawer"
+                                onClick={this.handleDrawerOpen}
+                                className={classNames(
+                                    classes.menuButton,
+                                    this.state.open && classes.menuButtonHidden,
+                                )}
+                            >
+                                <MenuIcon />
+                            </IconButton>
+                            <Typography
+                                component="h1"
+                                variant="h5"
+                                color="inherit"
+                                noWrap
+                                className={classes.title}
+                            >
+                                Manga-site
+                            </Typography>
+                            <IconButton color="inherit">
+                                <Badge badgeContent={4} color="secondary">
+                                    <NotificationsIcon />
+                                </Badge>
+                            </IconButton>
+                        </Toolbar>
+                    </AppBar>
+                    <Drawer
+                        variant="permanent"
+                        classes={{
+                            paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
+                        }}
+                        open={this.state.open}
+                    >
+                        <div className={classes.toolbarIcon}>
+                            <IconButton onClick={this.handleDrawerClose}>
+                                <ChevronLeftIcon />
+                            </IconButton>
+                        </div>
+                        <Divider />
+                        <List>{mainListItems}</List>
+                    </Drawer>
+                    <main className={classes.content}>
+                        <div className={classes.appBarSpacer} />
+                            
+                        
+                    </main>
+                </div>
+                {/* Footer */}
+                <footer className={classes.footer}>
+                    <Typography variant="h6" align="center" gutterBottom>
+                        Footer
+        </Typography>
+                    <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
+                        Something here to give the footer a purpose!
+        </Typography>
+                </footer>
+                {/* End footer */}
+
+            </React.Fragment>
+        );
+    }
+}
+
+Dashboard.propTypes = {
     classes: PropTypes.object.isRequired,
-    theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(Main);
+export default withStyles(styles)(Dashboard);
