@@ -1,8 +1,5 @@
-import _ from 'lodash'
 import React, { Component } from 'react'
-import MainPanel from './main_panel'
-import MainCarousel from './main_slider'
-
+import { Link } from 'react-router-dom'
 import {
     Container,
     Divider,
@@ -11,9 +8,7 @@ import {
     Header,
     Icon,
     Image,
-    List,
     Menu,
-    Segment,
     Visibility,
 } from 'semantic-ui-react'
   
@@ -32,40 +27,6 @@ const fixedMenuStyle = {
     boxShadow: '0px 3px 5px rgba(0, 0, 0, 0.2)',
     padding: '1em',
 }
- 
-
-const Footer = () => (
-        <Segment inverted style={{ margin: '5em 0em 0em', padding: '5em 0em' }} vertical>
-            <Container textAlign='center'>
-                <Grid columns={1} divided stackable inverted>
-                    <Grid.Row>
-                        <Grid.Column>
-                            <Header inverted as='h4' content='Footer Header' />
-                            <p>
-                                asdfghjkl;.....
-                            </p>
-                        </Grid.Column>
-                    </Grid.Row>
-                </Grid>
-                <Divider inverted section />
-                <Image src='/logo.png' centered size='mini' />
-                <List horizontal inverted divided link size='small'>
-                    <List.Item as='a' href='#'>
-                        Site Map
-                            </List.Item>
-                    <List.Item as='a' href='#'>
-                        Contact Us
-                            </List.Item>
-                    <List.Item as='a' href='#'>
-                        Terms and Conditions
-                            </List.Item>
-                    <List.Item as='a' href='#'>
-                        Privacy Policy
-                            </List.Item>
-                </List>
-            </Container>
-        </Segment>
-    );
 
 export default class Main extends Component {
     state = {
@@ -73,25 +34,12 @@ export default class Main extends Component {
         overlayFixed: false,
     }
 
-    handleOverlayRef = (c) => {
-        const { overlayRect } = this.state
-
-        if (!overlayRect) {
-            this.setState({ overlayRect: _.pick(c.getBoundingClientRect(), 'height', 'width') })
-        }
-    }
-
-    stickOverlay = () => this.setState({ overlayFixed: true })
-
     stickTopMenu = () => this.setState({ menuFixed: true })
-
-    unStickOverlay = () => this.setState({ overlayFixed: false })
 
     unStickTopMenu = () => this.setState({ menuFixed: false })
 
     render() {
-        const { menuFixed} = this.state
-
+        const { menuFixed } = this.state
         return (
             <div>
                 <style>{`
@@ -128,7 +76,7 @@ export default class Main extends Component {
                         style={menuFixed ? fixedMenuStyle : menuStyle}
                     >
                         <Container style={{width: '79%'}}>
-                            <Menu.Item as='a' header>
+                            <Menu.Item as={Link} to='/' header>
                                 <Icon name='home'/>
                                 Panda
                             </Menu.Item>
@@ -145,18 +93,6 @@ export default class Main extends Component {
                     </Menu>
                 </Visibility>
                 <Divider/>
-
-                {/* Main Carousel */}
-                <MainCarousel />
-                
-                {/* Main Body */}
-                <Container style={{ background: '#f5f6fc'}} fluid>
-                    <Divider horizontal>Manga Updates</Divider>
-                    <MainPanel />
-                </Container>
-
-                {/* Main Footer */}
-                <Footer />
             </div>
         )
     }

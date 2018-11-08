@@ -1,14 +1,20 @@
-var express = require('express');
-var app = express();
-var homeRouter = require('./routes/home');
-var cors = require('cors')
+const express = require('express');
+const app = express();
+const homeRouter = require('./routes/homeRouter');
+const cors = require('cors')
+const bodyParser = require('body-parser')
+const mongoose = require('mongoose');
+
+var mongoDB = 'mongodb://johnpierrecena:Annarasumanara1@ds253203.mlab.com:53203/manga_panda';
+mongoose.connect(mongoDB, { useNewUrlParser: true });
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(cors())
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/home', homeRouter);
-app.get('/', (req, res) => {
-
-});
-
+ 
 app.listen(3001, () => {
   console.log('Example app listening on port 3001!');
 });
