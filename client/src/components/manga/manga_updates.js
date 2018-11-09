@@ -14,7 +14,7 @@ import {
 const Panel = () => (
     <div>
         <MainCarousel />
-        <Container style={{ background: '#f5f6fc' }} fluid>
+        <Container fluid>
             <Divider horizontal>Manga Updates</Divider>
             <Grid padded>
                 <Grid.Row>
