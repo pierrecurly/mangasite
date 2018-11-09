@@ -6,11 +6,11 @@ import MangaDetail from '../manga/manga_detail'
 
 const MainRoute = () => (
   <main>
-        <Switch>
-            <Route exact path='/' component={MangaUpdates} />
-            <Route path='/manga' component={MangaList} />
-            <Route path='/manga/:id' component={MangaDetail} />
-        </Switch>
+    <Switch>
+      <Route exact path='/' component={MangaUpdates} />
+      <Route exact path='/manga' component={MangaList} />
+      <Route exact path='/manga/:id' component={MangaDetail} />
+    </Switch>
   </main>
 )
 
