@@ -18,7 +18,7 @@ export default () => (
                         <Header inverted as='h4' content='Footer Header' />
                         <p>
                             asdfghjkl;.....
-                            </p>
+                        </p>
                     </Grid.Column>
                 </Grid.Row>
             </Grid>

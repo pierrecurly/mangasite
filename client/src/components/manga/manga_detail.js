@@ -4,40 +4,39 @@ import {
     Grid,
     Card,
     Header,
+    Breadcrumb,
 } from 'semantic-ui-react';
+
+const containerShadow = {
+    backgroundColor: '#fff',
+    border: '1px solid #ddd',
+    boxShadow: '0px 3px 5px rgba(0, 0, 0, 0.2)',
+}
 export default class MangaDetail extends Component {
 
     render() {
         return (
-            <Container style={{ background: '#f5f6fc' }} fluid>
-                <Container style={{ background: '#fff' }}>
-                    <Grid padded>
+            <div style={{ background: '#f5f6fc' }}>
+                <Container>
+                    <Grid columns={2}>
                         <Grid.Row>
-                            <Grid.Column width={5}>
+                            <Grid.Column align='right' width={6}>
                                 <Card
                                     style={{ display: 'inline' }}
                                     image='assets/manga/noragami.jpg'
                                 />
                             </Grid.Column>
-                            <Grid.Column width={11}>
-                                <Header as='h1'>
-                                    Noragami
-                                </Header>
-                                <p><b>Genre: </b>asdfghjkl;...</p>
-                                <p><b>Author: </b>Adachitoka</p>
-                                <p><b>Status: </b>Completed</p>
-                                <p>Yato is a minor god whose dream is to have a lot of followers worshiping him and praying to him. Unfortunately, his dream is far from coming true since he doesn't even have a single shrine dedicated to him. To make things worse, the only partner he had to help him solve people's problems, had just quit the job.
-                                His godly existence and luck just might change after he stumbles upon Iki Hiyori and saves her life—a feat which also leaves her in quite a predicament as she is stuck with him until her problem gets resolved. Together with Hiyori and his new partner/weapon Yukine, Yato will do everything he can to gain fame, recognition and just maybe, one shrine dedicated to him.</p>
-                            </Grid.Column>
-                        </Grid.Row>
-                        <Grid.Row>
-                            <Grid.Column>
-
+                            <Grid.Column width={10}>
+                                <Header size='huge'>Noragami</Header>
+                                <p>Action</p>
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
                 </Container>
-            </Container>
+                <Container>
+
+                </Container>
+            </div>
         )
     }
 }

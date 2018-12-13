@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import MainCarousel from './manga_carousel'
+import TopManga from './manga_top'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
 import {
     Container,
     Grid,
-    Segment,
     Card,
-    Header,
     Divider,
 } from 'semantic-ui-react'
 
-const Panel = () => (
+const UpdatePanel = () => (
     <div>
         <MainCarousel />
         <Container fluid>
@@ -77,12 +77,7 @@ const Panel = () => (
                         </Grid>
                     </Grid.Column>
                     <Grid.Column width={4}>
-                        <Segment>
-                            <Header as={'h3'}>
-                                Top Manga
-                    </Header>
-                            Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum
-                </Segment>
+                        <TopManga />
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
@@ -90,19 +85,36 @@ const Panel = () => (
     </div>
 );
 
-export default class MangaUpdates extends Component {
+class MangaUpdates extends Component {
 
     componentDidMount() {
-        axios.post('http://localhost:3001/home', {
+        const { onLoad } = this.props;
+
+        axios.post('http://localhost:3001', {
 
         }).then(res => {
+            onLoad(res.data);
             console.log(res);
         });
     }
 
     render() {
+        const { mangaList } = this.props;
+
         return (
-            <Panel />
+            <UpdatePanel mangaList={mangaList}/>
         )
     }
 }
+
+const mapStateToProps = state => ({
+    mangaList: state.mangaUpdate.mangaList,
+});
+
+const mapDispatchToProps = dispatch => ({
+    onLoad: data => dispatch({ type: 'PAGE_LOADED', data }),
+    onDelete: id => dispatch({ type: 'DELETE_MANGA', id }),
+    setEdit: mangaList => dispatch({ type: 'SET_EDIT', mangaList }),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MangaUpdates);

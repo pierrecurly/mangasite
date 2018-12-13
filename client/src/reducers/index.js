@@ -1,0 +1,51 @@
+export const mangaUpdate = (state = { mangaList: [] }, action) => {
+    switch (action.type) {
+        case 'PAGE_LOADED':
+        return {
+            ...state,
+            mangaList: action.data.mangaList,
+        };
+        case 'SUBMIT_MANGA':
+        return {
+            ...state,
+            mangaList: ([action.data.mangaList]).concat(state.mangaList),
+        };
+        case 'DELETE_MANGA':
+        return {
+            ...state,
+            mangaList: state.mangaList.filter((mangaList) => mangaList._id !== action.id),
+        };
+        case 'SET_EDIT':
+        return {
+            ...state,
+            mangaToEdit: action.mangaList,
+        };
+        case 'EDIT_MANGA':
+        return {
+            ...state,
+            mangaList: state.mangaList.map((mangaList) => {
+            if (mangaList._id === action.data.mangaList._id) {
+                return {
+                ...action.data.mangaList,
+                }
+            }
+            return mangaList;
+            }),
+            mangaToEdit: undefined,
+        }
+        default:
+            return state;
+    }
+};
+
+export const mangaTop = (state = { topMangas: []} , action) => {
+    switch (action.type) {
+        case 'PAGE_LOADED': 
+        return {
+            ...state,
+            mangaList: action.data.mangaList,
+        }
+        default:
+            return state
+    }
+}

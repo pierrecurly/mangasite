@@ -5,15 +5,17 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 
-var mongoDB = 'mongodb://johnpierrecena:Annarasumanara1@ds253203.mlab.com:53203/manga_panda';
-mongoose.connect(mongoDB, { useNewUrlParser: true });
-mongoose.Promise = global.Promise;
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+// database config
+// var mongoDB = 'mongodb://johnpierrecena:Annarasumanara1@ds253203.mlab.com:53203/manga_panda';
+// mongoose.connect(mongoDB, { useNewUrlParser: true });
+// mongoose.Promise = global.Promise;
+// var db = mongoose.connection;
+// db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+// middleware
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/home', homeRouter);
+app.use('/', homeRouter);
  
 app.listen(3001, () => {
   console.log('Example app listening on port 3001!');

@@ -4,7 +4,7 @@ import MangaUpdates from '../manga/manga_updates'
 import MangaList from '../manga/manga_list'
 import MangaDetail from '../manga/manga_detail'
 
-const MainRoute = () => (
+const MainRoute = (props) => (
   <main>
     <Switch>
       <Route exact path='/' component={MangaUpdates} />

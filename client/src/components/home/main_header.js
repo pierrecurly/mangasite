@@ -10,6 +10,7 @@ import {
     Image,
     Menu,
     Visibility,
+    Dropdown,
 } from 'semantic-ui-react'
   
 const menuStyle = {
@@ -72,7 +73,7 @@ export default class Main extends Component {
                 >
                     <Menu
                         borderless
-                        fixed={menuFixed && 'top'}
+                        fixed={menuFixed ? 'top' : ''}
                         style={menuFixed ? fixedMenuStyle : menuStyle}
                     >
                         <Container style={{width: '79%'}}>
@@ -81,7 +82,15 @@ export default class Main extends Component {
                                 Panda
                             </Menu.Item>
                             <Menu.Item as='a'>
-                                <Icon name='sort descending'/>Browse
+                                <Dropdown text='Browse' icon='sort descending' floating labeled className='icon'>
+                                    <Dropdown.Menu>
+                                        <Dropdown.Header icon='tags' content='Filter by genre' />
+                                        <Dropdown.Divider />
+                                        <Dropdown.Item icon='attention' text='Adventure' />
+                                        <Dropdown.Item icon='comment' text='Action' />
+                                        <Dropdown.Item icon='conversation' text='Romance' />
+                                    </Dropdown.Menu>
+                                </Dropdown>
                             </Menu.Item>
                             <Menu.Item as='a'>
                                 <Icon name='search'/>Search

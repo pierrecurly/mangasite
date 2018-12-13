@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { 
     Container, 
-    Grid, 
-    Card,
-    Header,
 } from 'semantic-ui-react';
 
 const containerShadow = {
@@ -16,7 +13,7 @@ export default class MangaList extends Component {
     render() {
         return (
             <Container style={{ background: '#f5f6fc' }} fluid>
-                <Container style={containerShadow} padded>
+                <Container style={containerShadow} padded="true">
                     
                 </Container>
             </Container>

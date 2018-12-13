@@ -75,7 +75,7 @@ const authorList = [
 ];
 
 
-let populate = () => {
+const populate = () => {
     mangaList.map(manga => {
         let newManga = new Manga({
             _id: manga._id,
