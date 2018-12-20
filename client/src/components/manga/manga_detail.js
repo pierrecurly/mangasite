@@ -4,14 +4,13 @@ import {
     Grid,
     Card,
     Header,
-    Breadcrumb,
 } from 'semantic-ui-react';
 
-const containerShadow = {
-    backgroundColor: '#fff',
-    border: '1px solid #ddd',
-    boxShadow: '0px 3px 5px rgba(0, 0, 0, 0.2)',
-}
+// const containerShadow = {
+//     backgroundColor: '#fff',
+//     border: '1px solid #ddd',
+//     boxShadow: '0px 3px 5px rgba(0, 0, 0, 0.2)',
+// }
 export default class MangaDetail extends Component {
 
     render() {

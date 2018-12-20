@@ -9,7 +9,7 @@ const MainRoute = (props) => (
     <Switch>
       <Route exact path='/' component={MangaUpdates} />
       <Route exact path='/manga' component={MangaList} />
-      <Route exact path='/manga/:id' component={MangaDetail} />
+      <Route exact path='/manga/:title' component={MangaDetail} />
     </Switch>
   </main>
 )

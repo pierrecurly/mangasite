@@ -5,9 +5,11 @@ let MangaSchema = new Schema({
   _id: Schema.Types.ObjectId,
   title: String,
   summary: String,
+  name: String,
   status: String,
   thumbnail: Buffer,
   chapter_count: String,
+  views: Number,
   author: {
     type: Schema.Types.ObjectId,
     ref: 'Author'
@@ -37,4 +39,4 @@ MangaSchema.virtual("url").get(function () {
   return "/home/" + this._id;
 });
 
-module.exports = mongoose.model("Manga", MangaSchema);
+module.exports = mongoose.model("MangaList", MangaSchema);

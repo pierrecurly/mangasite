@@ -1,8 +1,9 @@
-export const mangaUpdate = (state = { mangaList: [] }, action) => {
+export const mangaUpdate = (state = { mangaList: [], mangaTop: [] }, action) => {
     switch (action.type) {
         case 'PAGE_LOADED':
         return {
             ...state,
+            mangaTop: action.data.mangaTop,
             mangaList: action.data.mangaList,
         };
         case 'SUBMIT_MANGA':
@@ -38,14 +39,14 @@ export const mangaUpdate = (state = { mangaList: [] }, action) => {
     }
 };
 
-export const mangaTop = (state = { topMangas: []} , action) => {
-    switch (action.type) {
-        case 'PAGE_LOADED': 
-        return {
-            ...state,
-            mangaList: action.data.mangaList,
-        }
-        default:
-            return state
-    }
-}
+// export const mangaTop = (state = { topMangas: []} , action) => {
+//     switch (action.type) {
+//         case 'PAGE_LOADED': 
+//         return {
+//             ...state,
+//             mangaList: action.data.mangaList,
+//         }
+//         default:
+//             return state
+//     }
+// }

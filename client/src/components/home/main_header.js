@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import LoginModal from './main_login'
 import {
     Container,
     Divider,
-    Button,
     Grid,
     Header,
     Icon,
@@ -59,7 +59,7 @@ export default class Main extends Component {
                             <Header as='h1'>
                                 <Header.Content>
                                     Manga Panda
-                            <Header.Subheader>Read your favorite manga right here.</Header.Subheader>
+                                    <Header.Subheader>Read your favorite manga right here.</Header.Subheader>
                                 </Header.Content>
                             </Header>
                         </Grid.Row>
@@ -96,7 +96,7 @@ export default class Main extends Component {
                                 <Icon name='search'/>Search
                             </Menu.Item>
                             <Menu.Menu position='right'>
-                                <Button basic color='blue'>Login</Button>
+                                <LoginModal />
                             </Menu.Menu>
                         </Container>
                     </Menu>

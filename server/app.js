@@ -6,11 +6,11 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 
 // database config
-// var mongoDB = 'mongodb://johnpierrecena:Annarasumanara1@ds253203.mlab.com:53203/manga_panda';
-// mongoose.connect(mongoDB, { useNewUrlParser: true });
-// mongoose.Promise = global.Promise;
-// var db = mongoose.connection;
-// db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+var mongoDB = 'mongodb://localhost:27017/mangasite';
+mongoose.connect(mongoDB, { useNewUrlParser: true });
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // middleware
 app.use(cors())

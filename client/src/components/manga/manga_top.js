@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
     Segment,
@@ -8,80 +7,42 @@ import {
     Image,
 } from 'semantic-ui-react'
 
-const TopPanel = () => (
-    <Table basic='very' celled collapsing>
-        <Table.Header>
-            <Table.Row>
-                <Table.HeaderCell>Top Manga</Table.HeaderCell>
-            </Table.Row>
-        </Table.Header>
+const TopPanel = (props) => {
 
-        <Table.Body>
-            <Table.Row>
-                <Table.Cell>
-                    <Header as='h4' image>
-                        <Image src='assets/manga/noragami.jpg' rounded size='massive' />
-                        <Header.Content as={Link} to={`/manga/${'123'}`}>
-                            Noragami
-                            <Header.Subheader>Chapter 100</Header.Subheader>
-                        </Header.Content>
-                    </Header>
-                </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-                <Table.Cell>
-                    <Header as='h4' image>
-                        <Image src='assets/manga/noragami.jpg' rounded size='massive' />
-                        <Header.Content as={Link} to={`/manga/${'123'}`}>
-                            Noragami
-                            <Header.Subheader>Chapter 100</Header.Subheader>
-                        </Header.Content>
-                    </Header>
-                </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-                <Table.Cell>
-                    <Header as='h4' image>
-                        <Image src='assets/manga/noragami.jpg' rounded size='massive' />
-                        <Header.Content as={Link} to={`/manga/${'123'}`}>
-                            Noragami
-                            <Header.Subheader>Chapter 100</Header.Subheader>
-                        </Header.Content>
-                    </Header>
-                </Table.Cell>
-            </Table.Row>
-            <Table.Row>
-                <Table.Cell>
-                    <Header as='h4' image>
-                        <Image src='assets/manga/noragami.jpg' rounded size='massive' />
-                        <Header.Content as={Link} to={`/manga/${'123'}`}>
-                            Noragami
-                            <Header.Subheader>Chapter 100</Header.Subheader>
-                        </Header.Content>
-                    </Header>
-                </Table.Cell>
-            </Table.Row>
-        </Table.Body>
-    </Table>
-    );
+    return props.mangaTop.map((manga) => (
+        <Table.Row key={manga._id}>
+            <Table.Cell>
+                <Header as='h4' image>
+                    <Image src={`assets/manga/${manga.name}.jpg`} rounded size='massive' />
+                    <Header.Content as={Link} to={`/manga/${manga.name}`}>
+                        {manga.title}
+                        <Header.Subheader>Chapter 100</Header.Subheader>
+                    </Header.Content>
+                </Header>
+            </Table.Cell>
+        </Table.Row>
+    ));
+}
 
 class MangaTop extends Component {
 
     render() {
         return (
             <Segment>
-                <TopPanel />
+                <Table basic='very' celled collapsing>
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell>Top Manga</Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+
+                    <Table.Body>
+                        <TopPanel mangaTop={this.props.mangaTop}/>
+                    </Table.Body>
+                </Table>
             </Segment>
         );
     }
 }
 
-const mapStateToProps = state => ({
-    mangaList: state.mangaTop.mangaList,
-});
-
-const mapDispatchToProps = dispatch => ({
-    onLoad: data => dispatch({ type: 'PAGE_LOADED', data }),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(MangaTop);
+export default MangaTop;
