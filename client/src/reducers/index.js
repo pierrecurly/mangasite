@@ -39,6 +39,24 @@ export const mangaUpdate = (state = { mangaList: [], mangaTop: [] }, action) => 
     }
 };
 
+export const user = (state = { user: [], isSignedIn : false } , action) => {
+    switch(action.type) {
+        case 'USER_LOGIN' :
+        return {
+            ...state,
+            user: action.data,
+            isSignedIn: true,
+        };
+        case 'USER_LOGOUT' :
+        return {
+            ...state,
+            user: action.data,
+            isSignedIn: false,
+        };
+        default:
+            return state
+    }
+}
 // export const mangaTop = (state = { topMangas: []} , action) => {
 //     switch (action.type) {
 //         case 'PAGE_LOADED': 

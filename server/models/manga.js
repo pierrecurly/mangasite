@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let MangaSchema = new Schema({
-  _id: Schema.Types.ObjectId,
   title: String,
   summary: String,
   name: String,

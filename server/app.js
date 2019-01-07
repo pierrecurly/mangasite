@@ -15,6 +15,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 // middleware
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use('/', homeRouter);
  
 app.listen(3001, () => {

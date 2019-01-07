@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let AuthorSchema = new Schema({
-    _id: Schema.Types.ObjectId,
     name: {
         firstName: {
             type: String,

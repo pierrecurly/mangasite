@@ -1,8 +1,9 @@
 import { createStore, combineReducers } from 'redux';
-import { mangaUpdate } from './reducers/index.js';
+import { mangaUpdate, user } from './reducers/index.js';
 
 const reducers = combineReducers({
     mangaUpdate,
+    user,
 });
 
 const store = createStore(reducers);

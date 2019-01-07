@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import LoginModal from './main_login'
+import MainLogin from './main_login'
 import {
     Container,
     Divider,
@@ -96,7 +96,7 @@ export default class Main extends Component {
                                 <Icon name='search'/>Search
                             </Menu.Item>
                             <Menu.Menu position='right'>
-                                <LoginModal />
+                                <MainLogin />
                             </Menu.Menu>
                         </Container>
                     </Menu>

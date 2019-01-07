@@ -12,9 +12,9 @@ const TopPanel = (props) => {
     return props.mangaTop.map((manga) => (
         <Table.Row key={manga._id}>
             <Table.Cell>
-                <Header as='h4' image>
+                <Header as={Link} to={`/manga/${manga.name}`} image>
                     <Image src={`assets/manga/${manga.name}.jpg`} rounded size='massive' />
-                    <Header.Content as={Link} to={`/manga/${manga.name}`}>
+                    <Header.Content>
                         {manga.title}
                         <Header.Subheader>Chapter 100</Header.Subheader>
                     </Header.Content>

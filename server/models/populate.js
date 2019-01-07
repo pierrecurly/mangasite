@@ -5,7 +5,6 @@ const Schema = mongoose.Schema;
 
 const mangaList = [
     {
-        _id: mongoose.Types.ObjectId(),
         title: 'Noragami',
         summary: 'sdfgjhk...',
         status: 'On going',
@@ -13,7 +12,6 @@ const mangaList = [
         views: 1000000,
     }, 
     {
-        _id: mongoose.Types.ObjectId(),
         title: 'One Piece',
         summary: 'Pirate King!@@',
         status: 'On going',
@@ -21,7 +19,6 @@ const mangaList = [
         views: 1000001,
     }, 
     {
-        _id: mongoose.Types.ObjectId(),
         title: 'Bleach',
         summary: 'Shinagami asdfsg....',
         status: 'On going',
@@ -29,7 +26,6 @@ const mangaList = [
         views: 1000002,
     },
     {
-        _id: mongoose.Types.ObjectId(),
         title: 'Overlord',
         summary: 'Sorcerer King!!',
         status: 'On going',
@@ -37,7 +33,6 @@ const mangaList = [
         views: 1000003,
     }, 
     {
-        _id: mongoose.Types.ObjectId(),
         title: 'Shokugeki No Soma',
         summary: 'luto luto xD',
         status: 'On going',
@@ -48,52 +43,55 @@ const mangaList = [
 
 const authorList = [
     {
-        _id: mongoose.Types.ObjectId(),
         name: {
-            firstName: '',
-            lastName: ''
+            firstName: 'test 1',
+            lastName: 'test 1'
         }
     }, 
     {
-        _id: mongoose.Types.ObjectId(),
         name: {
-            firstName: '',
-            lastName: ''
+            firstName: 'test 2',
+            lastName: 'test 2'
         }
     },
     {
-        _id: mongoose.Types.ObjectId(),
         name: {
-            firstName: '',
-            lastName: ''
+            firstName: 'test 3',
+            lastName: 'test 3'
         }
     }, 
     {
-        _id: mongoose.Types.ObjectId(),
         name: {
-            firstName: '',
-            lastName: ''
+            firstName: 'test 4',
+            lastName: 'test 4'
         }
     }, 
     {
-        _id: mongoose.Types.ObjectId(),
         name: {
-            firstName: '',
-            lastName: ''
+            firstName: 'test 5',
+            lastName: 'test 5'
         }
     }, 
 ];
 
 
 const populate = () => {
-    mangaList.map(manga => {
+    mangaList.map((manga, i) => {
+
+        let newAuthor = new Author(authorList[i]);
+        newAuthor.save((err) => {
+            if (err) throw err;
+            console.log('Manga successfully saved.');
+        });
+ 
         let newManga = new MangaList({
             _id: manga._id,
             title: manga.title,
             name: manga.name,
             status: manga.status,
             summary: manga.summary,
-            views: manga.views
+            views: manga.views,
+            author: newAuthor._id
         });
 
         newManga.save((err) => {
@@ -102,4 +100,5 @@ const populate = () => {
         });
     })
 }
+
 module.exports = populate;

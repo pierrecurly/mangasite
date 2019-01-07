@@ -32,8 +32,8 @@ class MangaUpdates extends Component {
 
     componentDidMount() {
         const { onLoad } = this.props;
-        axios.get('http://localhost:3001/', {
-        }).then(res => {
+        axios.get('http://localhost:3001')
+        .then(res => {
             onLoad(res.data);
             console.log(res);
         });
@@ -49,14 +49,16 @@ class MangaUpdates extends Component {
                     <Divider horizontal>Manga Updates</Divider>
                     <Grid columns={2} padded doubling>
                         <Grid.Column width={12}>
-                            <Grid columns={5} doubling>
+                            <Grid columns={6} doubling>
                                 <Grid.Row>
                                     <UpdatePanel mangaList={mangaList} />
                                 </Grid.Row>
                             </Grid>
                         </Grid.Column>
                         <Grid.Column width={4}>
-                            <TopManga mangaTop={mangaTop}/>
+                            <Grid columns={1}>
+                                <TopManga mangaTop={mangaTop} />
+                            </Grid>
                         </Grid.Column>
                     </Grid>
                 </Container>
