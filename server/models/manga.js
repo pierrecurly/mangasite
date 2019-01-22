@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let MangaSchema = new Schema({
+const MangaSchema = new Schema({
   title: String,
   summary: String,
   name: String,
@@ -13,29 +13,14 @@ let MangaSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Author'
   },
-  category: { 
-    type: Schema.Types.ObjectId, 
-    ref: "Category"
-  },
-  // ratings: [
-  //   {
-  //     summary: String,
-  //     detail: String,
-  //     numberOfStars: Number,
-  //     created: {
-  //       type: Date,
-  //       default: Date.now
-  //     }
-  //   }
-  // ],
   created: {
     type: Date,
     default: Date.now
   }
 });
 
-MangaSchema.virtual("url").get(function () {
-  return "/home/" + this._id;
+MangaSchema.virtual('url').get(function () {
+  return '/home/' + this._id;
 });
 
-module.exports = mongoose.model("MangaList", MangaSchema);
+module.exports = mongoose.model('MangaList', MangaSchema);

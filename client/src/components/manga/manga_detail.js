@@ -16,16 +16,13 @@ export default class MangaDetail extends Component {
     name = this.props.match.params.title;
 
     state = {
-        mangaDetail: {}
     }
 
     componentDidMount() {
-        console.log(`title: ${this.name}`);
         axios.post(`http://localhost:3001/manga`, {
             name: this.name
         }).then((res) => {
-            console.log(res);
-            this.setState({ mangaDetail: res.data.mangaDetail });
+            this.setState({ ...res.data});
         }).catch((err) => {
             console.log(err);
         })
@@ -33,7 +30,7 @@ export default class MangaDetail extends Component {
 
     render() {
         
-        return (
+        return (this.state.hasOwnProperty('mangaDetail')) ? (
             <div style={{ background: '#f5f6fc' }}>
                 <Container>
                     <Grid columns={2}>
@@ -46,7 +43,9 @@ export default class MangaDetail extends Component {
                             </Grid.Column>
                             <Grid.Column width={10}>
                                 <Header size='huge'>{this.state.mangaDetail.title}</Header>
-                                <p>Action</p>
+                                {this.state.mangaGenre.map((mangaGenre, i) => {
+                                    return (<p key={mangaGenre._id}>{mangaGenre.genre.genre}</p>)
+                                })}
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
@@ -55,6 +54,6 @@ export default class MangaDetail extends Component {
 
                 </Container>
             </div>
-        ) 
+        ) : <div></div>
     }
 }

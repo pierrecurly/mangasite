@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let AuthorSchema = new Schema({
+const AuthorSchema = new Schema({
     name: {
         firstName: {
             type: String,
@@ -15,8 +15,8 @@ let AuthorSchema = new Schema({
     }
 });
 
-AuthorSchema.virtual("url").get(function () {
-    return "/catalog/author/" + this._id;
+AuthorSchema.virtual('url').get(function () {
+    return '/catalog/author/' + this._id;
 });
 
-module.exports = mongoose.model("Author", AuthorSchema);
+module.exports = mongoose.model('Author', AuthorSchema);

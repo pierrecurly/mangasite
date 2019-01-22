@@ -77,7 +77,6 @@ class MainLogin extends Component {
         const { onLogin, onLogout } = this.props;
 
         firebase.auth().onAuthStateChanged(user => {
-            console.log(user);
 
             (user != null) ? onLogin(user) : onLogout(user)
         })

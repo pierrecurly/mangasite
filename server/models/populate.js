@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Author = require('./author');
 const MangaList = require('./manga');
+const Genre = require('./genre');
+const MangaGenre = require('./manga_genre');
 const Schema = mongoose.Schema;
 
 const mangaList = [
@@ -74,31 +76,73 @@ const authorList = [
     }, 
 ];
 
+const genreList = [
+    {
+        genre: 'Action'
+    },
+    {
+        genre: 'Fiction'
+    },
+    {
+        genre: 'Romance'
+    },
+    {
+        genre: 'Adventure'
+    },
+    {
+        genre: 'Horror'
+    },
+];
 
 const populate = () => {
-    mangaList.map((manga, i) => {
 
-        let newAuthor = new Author(authorList[i]);
-        newAuthor.save((err) => {
+    genreList.map((genre, i) => {
+        let newGenre = new Genre(genre[i]);
+        newGenre.save((err) => {
             if (err) throw err;
-            console.log('Manga successfully saved.');
+            console.log('Genre successfully saved.');
         });
- 
-        let newManga = new MangaList({
-            _id: manga._id,
-            title: manga.title,
-            name: manga.name,
-            status: manga.status,
-            summary: manga.summary,
-            views: manga.views,
-            author: newAuthor._id
-        });
+    });
 
-        newManga.save((err) => {
-            if (err) throw err;
-            console.log('Manga successfully saved.');
-        });
-    })
+    setTimeout(() => {
+        mangaList.map((manga, i) => {
+
+            let newAuthor = new Author(authorList[i]);
+            newAuthor.save((err) => {
+                if (err) throw err;
+                console.log('Author successfully saved.');
+            });
+
+            let newManga = new MangaList({
+                _id: manga._id,
+                title: manga.title,
+                name: manga.name,
+                status: manga.status,
+                summary: manga.summary,
+                views: manga.views,
+                author: newAuthor._id
+            });
+
+            newManga.save((err) => {
+                if (err) throw err;
+                console.log('Manga successfully saved.');
+            });
+
+            for (let x = 0; x < 2; x++) {
+                let random = Math.floor(Math.random() * 5)
+
+                Genre.findOne().skip(random).exec((err, genre) => {
+
+                    let newMangaGenre = new MangaGenre({ genre: genre._id, manga: newManga._id });
+                    newMangaGenre.save((err) => {
+                        if (err) throw err;
+                        console.log('Genre successfully saved.');
+                    });
+                });
+            }
+        })
+
+    }, 5000)
 }
 
 module.exports = populate;
